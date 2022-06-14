@@ -11,14 +11,36 @@ class CartItem extends React.Component{
         }
        // this.increaseQuantity = this.increaseQuantity.bind(this)
     }
+
     increaseQuantity = () => {
         //this.state.qty += 1;
         //console.log('this', this.state);
         //setState form 1
-        this.setState({
-            qty: this.state.qty + 1
-        })
+        //this.setState({
+        //    qty: this.state.qty + 1
+        //});
+        //setState form 2 if prevState required use this
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty + 1
+            }
+        });
+    }
+    
+    decreaseQuantity = () => {
+        const { qty } = this.state;
+
+        if(qty === 0){
+            return;
+        }
+        //setState form 2 if prevState required use this
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty - 1
+            }
+        });
     } 
+
     render(){
         const { price, title, qty } = this.state;
         return (
@@ -34,17 +56,18 @@ class CartItem extends React.Component{
                         {/* Buttons */}
                         <img alt="increase" 
                              className="action-icons" 
-                             src="https://cdn-icons.flaticon.com/png/128/3303/premium/3303893.png?token=exp=1655134717~hmac=3fe7a7d1d61472606d4660a74f61df89" 
+                             src="https://cdn-icons.flaticon.com/png/128/3303/premium/3303893.png?token=exp=1655148449~hmac=23fb146fcc28e8a52340d297a24785f5" 
                              onClick={this.increaseQuantity}
                         />
                         <img 
                             alt="decrease" 
                             className="action-icons" 
-                            src="https://cdn-icons-png.flaticon.com/128/1828/1828906.png" />
+                            src="https://cdn-icons-png.flaticon.com/128/1828/1828906.png" 
+                            onClick={this.decreaseQuantity}/>
                         <img 
                             alt="delete" 
                             className="action-icons" 
-                            src="https://cdn-icons.flaticon.com/png/128/484/premium/484662.png?token=exp=1655134597~hmac=b4649ca05a782fe5bef56a3529511d3d" />
+                            src="https://cdn-icons.flaticon.com/png/128/484/premium/484662.png?token=exp=1655148513~hmac=e75f300581cc1aece0e70bacbf51cb0e" />
                     </div>
                 </div>
             </div>
